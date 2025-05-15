@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Product Management</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container fade-in">
+    <h2 class="text-center mt-4">All Products</h2>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Vendor</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="p : ${products}">
+                <td th:text="${p.name}">Name</td>
+                <td th:text="${p.description}">Description</td>
+                <td th:text="${p.price}">0.0</td>
+                <td th:text="${p.vendor.name}">Vendor</td>
+                <td>
+                    <a th:href="@{'/products/edit/' + ${p.id}}" class="btn btn-warning btn-sm">Edit</a>
+                    <a th:href="@{'/products/delete/' + ${p.id}}" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h2 class="text-center mt-4">Add New Product</h2>
+
+    <form th:action="@{/products}" method="post" th:object="${product}" class="form-container">
+        <div class="mb-3">
+            <input type="text" th:field="*{name}" placeholder="Name" required class="form-control"/>
+        </div>
+        <div class="mb-3">
+            <input type="text" th:field="*{description}" placeholder="Description" required class="form-control"/>
+        </div>
+        <div class="mb-3">
+            <input type="number" step="0.01" th:field="*{price}" placeholder="Price" required class="form-control"/>
+        </div>
+
+        <div class="mb-3">
+            <select th:field="*{vendor}" required class="form-select">
+                <option value="" disabled selected>Select Vendor</option>
+                <option th:each="v : ${vendors}" th:value="${v.id}" th:text="${v.name}"></option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block">Add Product</button>
+    </form>
+
+    <a href="/" class="btn btn-secondary mt-3">Back</a>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
