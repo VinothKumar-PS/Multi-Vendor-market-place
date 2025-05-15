@@ -23,7 +23,7 @@ A clean and modern product-vendor management system using Spring Boot + Thymelea
 ---
 
 ## 📂 Project Structure
-
+```
 src/
 ├── main/
 │   ├── java/
@@ -36,7 +36,7 @@ src/
 │       ├── templates/
 │       ├── static/css/
 │       └── application.properties
-
+```
 ---
 
 ## 💡 How to Run
